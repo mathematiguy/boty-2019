@@ -9,10 +9,8 @@ GIT_TAG ?= $(shell git log --oneline | head -n1 | awk '{print $$1}')
 
 notebooks: $(shell find notebooks -name "*.Rmd" | sed "s/\.Rmd/.pdf/g" | grep -v ".#")
 
-images: data/bird.urls
-data/bird.urls: data/boty.json
-	cat $< | jq -S '.[].image' | sed 's/"//g' > $@
-	cat $@ | xargs -I {} wget {} -P data/images
+images: data/boty.json
+	$(RUN) python3 scripts/download_images.py $<
 
 crawl: data/boty.json
 data/boty.json:

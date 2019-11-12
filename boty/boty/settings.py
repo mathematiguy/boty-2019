@@ -14,9 +14,6 @@ BOT_NAME = 'boty'
 SPIDER_MODULES = ['boty.spiders']
 NEWSPIDER_MODULE = 'boty.spiders'
 
-ITEM_PIPELINES = {'scrapy.pipelines.images.ImagesPipeline': 1}
-IMAGES_STORE = 'data/images'
-
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = 'mathematiguy https://github.com/mathematiguy/boty-2019'
 
