@@ -40,3 +40,9 @@ notebooks/*.bib
 notebooks/*.log
 notebooks/*.pdf
 notebooks/bird-of-the-year-2019.tex
+data/*.csv
+data/*.urls
+data/*.json
+data/images/*
+**/__pycache__
+**.pyc

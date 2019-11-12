@@ -9,12 +9,25 @@ GIT_TAG ?= $(shell git log --oneline | head -n1 | awk '{print $$1}')
 
 notebooks: $(shell find notebooks -name "*.Rmd" | sed "s/\.Rmd/.pdf/g" | grep -v ".#")
 
+images: data/bird.urls
+data/bird.urls: data/boty.json
+	cat $< | jq -S '.[].image' | sed 's/"//g' > $@
+	cat $@ | xargs -I {} wget {} -P data/images
+
+crawl: data/boty.json
+data/boty.json:
+	$(RUN) bash -c 'cd boty && scrapy crawl manu -o data/boty.json'
+
+data: data/BOTY-votes-2019.csv
+data/BOTY-votes-2019.csv:
+	wget https://www.dragonfly.co.nz/data/boty/BOTY-votes-2019.csv -P data
+
 %.pdf: %.Rmd
 	$(RUN) Rscript -e 'rmarkdown::render("$*.Rmd")'
 
 clean:
-	rm notebooks/*.html notebooks/*.pdf notebooks/*-self.bib notebooks/*.log \
-	notebooks/bird-of-the-year-2019.tex
+	rm -f notebooks/*.html notebooks/*.pdf notebooks/*-self.bib notebooks/*.log \
+	notebooks/bird-of-the-year-2019.tex data/*.json data/*.urls
 
 .PHONY: docker
 docker:
