@@ -1,0 +1,24 @@
+---
+title: "Bird of the Year 2019"
+subtitle: "`r format(Sys.time(), '%d %B, %Y')`"
+author: "Caleb Moses"
+documentclass: dragonfly-proposal
+# bibliography: ../deepspeech.bib
+# selfcitation: ../deepspeech-self.bib
+clean: False
+header-includes:
+  - \usepackage{draftwatermark}
+output:
+  bookdown::pdf_document2:
+    toc: false
+    latex_engine: xelatex
+    fig_width: 5
+    fig_height: 3
+    fig_caption: true
+    template: template.tex
+    keep_tex: true
+---
+
+# Introduction
+
+Here we're playing with the results from Bird of the Year New Zealand 2019.
